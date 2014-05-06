@@ -1,0 +1,123 @@
+.left { float: left; }
+.right { float: right; }
+
+.check img {
+  padding: 0;
+  background: none;
+}
+
+.checklist {
+  background: #fff url("bg-checklist.png") repeat-y scroll 35px 0;
+  font-size: 16px;
+  color: #404040;
+  padding: 25px 0;
+}
+
+.checklist #toggle-all {
+  border: none;
+  padding: 0 10px 10px 0;
+  float: right;
+}
+
+.checklist .item {}
+
+.checklist .item .box {
+  padding-left: 10px;
+  height: 40px;
+  font-weight: bold;
+  background: #ededed;
+  line-height: 40px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #bfbfbf;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
+  clear: both;
+}
+
+.checklist .item .box .check {
+  float: left;
+}
+
+.checklist .item .box .title {
+  float: left;
+  margin-left: 10px;
+}
+
+.checklist .item .box a {
+  padding-right: 10px;
+  border: none;
+  float: right;
+}
+
+.checklist .item .box .score {
+  border-left: 1px solid #bfbfbf;
+  width: 60px;
+  text-align: center;
+  font-weight: bold;
+  float: right;
+  height: 40px;
+}
+
+.checklist .sub-items {
+  padding: 0 0 0 40px;
+}
+
+.checklist .sub-items .sub-item {
+  margin-top: -4px;
+  border-top: 1px dotted #bfbfbf;
+  clear: both;
+  line-height: 40px;
+}
+
+.checklist .sub-items .sub-item .check {
+  float: left;
+  margin-left: 10px;
+}
+
+.checklist .sub-items .sub-item .title {
+  float: left;
+  margin-left: 10px;
+}
+
+.checklist .sub-items .sub-item .score {
+  border-left: 1px dotted #bfbfbf;
+  width: 60px;
+  text-align: center;
+  font-weight: bold;
+  float: right;
+  height: 40px;
+}
+
+.checklist .sub-items .sub-item a {
+  float: right;
+  font-weight: bold;
+  padding-right: 10px;
+  border: none;
+}
+
+.checklist .sub-items .sub-item .description {
+  margin-right: 60px;
+  padding-left: 40px;
+  padding-bottom: 15px;
+  border-right: 1px dotted #bfbfbf;
+  border-top: 1px dotted #bfbfbf;
+  clear: both;
+}
+
+.checklist .sub-items .sub-item .description p {
+  margin: 15px 0 0 0;
+  line-height: 1.5em;
+}
+
+.checklist .sub-items .sub-item .description p span {
+  color: #54aded;
+  font-weight: bold;
+}
+
+.checklist .sub-items .sub-item:first-child {
+  border-top: none;
+}
+
+.checklist .footer {
+  clear: both;
+}

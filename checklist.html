@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link href="checklist.css" rel="stylesheet">
+  <style>
+    body {
+      background: #bfbfbf;
+      font-family: sans-serif;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="checklist">
+    <a id="toggle-all" href="Javascript:toggleAll();">Hide All<a>
+    <div id="items"></div>
+    <div class="footer"></div>
+  </div>
+  
+  <script>
+    var items = [
+      {
+        title: "Number Systems",
+        score: "20/20",
+        sub_items: [
+          {
+            title: "Perform arithmatic in binary.",
+            description: "Sollicitudin sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
+          },
+          {
+            title: "Perform arithmatic in hexidecimal.",
+            score: "10/10",
+            description: "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Integer posuere erat a ante venenatis dapibus posuere velit aliquet."
+          }
+        ]
+      },
+      {
+        title: "Memory",
+        score: "30/30",
+        sub_items: [
+          {
+            title: "Describe a call stack and its uses.",
+            score: "20/20",
+            description: "Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          },
+          {
+            title: "Magnis dis nascetur ridiculus mus.",
+            score: "10/10",
+            description: "Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum."
+          }
+        ]
+      }
+    ];
+  </script>
+
+  <script>
+    var itemTemplate = "" +
+      "<div class='item'>" +
+        
+        "<div class='box'>" +
+          "<div class='check'><input type='checkbox' checked></div>" +
+          "<div class='title'>{title}</div>" +
+          "<div class='score'>{score}</div>" +
+          "<a id='toggle_{i}{j}' href='javascript:toggleItem(\"{i}{j}\");'>Hide</a>" +
+        "</div>" +
+        
+        "<div id='item_{i}{j}' class='sub-items'>" +
+          "{sub_items}" +
+        "</div>" +
+      "</div>";
+    
+    var subItemTemplate = "" +
+      "<div class='sub-item'>" +
+        "<div class='check'><input type='checkbox' checked></div>" +
+        "<div class='title'>{title}</div>" +
+        "<div class='score'>10/10</div>" +
+        "<a id='toggle_{i}{j}' href='Javascript:toggleItem(\"{i}{j}\");'>Less</a>" +
+        "<div id='item_{i}{j}' class='description'><p>{description}</p></div>" +
+      "</div>";
+    
+    
+    var html = "";
+    var itemID = "";
+    var itemIDs = [];
+    
+    
+    for (var i = 0; i < items.length; i++) {
+      
+      var subResult = "";
+      for (var j = 0; j < items[i].sub_items.length; j++) {
+        itemID = ''+i+j;
+        items[i].sub_items[j].id = itemID;
+        itemIDs.push(itemID);
+        var title = items[i].sub_items[j].title;
+        var score = items[i].sub_items[j].score;
+        var description = items[i].sub_items[j].description;
+        
+        var tmp = subItemTemplate
+          .replace(/{i}/g, i)
+          .replace(/{j}/g, j)
+          .replace("{title}", title)
+          .replace("{score}", score)
+          .replace("{description}", description);
+        subResult += tmp;
+      }
+      
+      itemID = ''+i;
+      items[i].id = itemID;
+      itemIDs.push(itemID);
+      var itemResult = "";
+      var title = items[i].title;
+      var score = items[i].score;
+      
+      var tmp = itemTemplate
+        .replace(/{i}/g, i)
+        .replace(/{j}/g, '')
+        .replace("{title}", title)
+        .replace("{score}", score)
+        .replace("{sub_items}", subResult);
+      html += tmp;
+    }
+    
+    var el = document.getElementById('items');
+    el.innerHTML = html;
+    
+  </script>
+
+  <script>
+    function toggleItem (id) {
+      var el = document.getElementById('item_' + id);
+      
+      if (el.style.display == 'none') {
+        el.style.display = 'block';
+      } else {
+        el.style.display = 'none';
+      }
+      
+      var el = document.getElementById('toggle_' + id);
+      var content = el.innerHTML;
+      
+      switch (content) {
+        case 'More':
+          el.innerHTML = 'Less';
+          break;
+        case 'Less':
+          el.innerHTML = 'More';
+          break;
+        case 'Show':
+          el.innerHTML = 'Hide';
+          break;
+        case 'Hide':
+          el.innerHTML = 'Show';
+          break;
+      }
+    }
+    
+    function toggleAll () {
+      var el;
+      var tEl = document.getElementById('toggle-all');
+      
+      if (tEl.innerHTML == 'Show All') {
+        tEl.innerHTML = 'Hide All';
+        for (var i = 0; i < itemIDs.length; i++) {
+          el = document.getElementById('item_' + itemIDs[i]);
+          if (el.style.display == 'none') {
+            toggleItem(itemIDs[i]);
+          }
+        }
+      } else {
+        tEl.innerHTML = 'Show All';
+        for (var i = 0; i < itemIDs.length; i++) {
+          el = document.getElementById('item_' + itemIDs[i]);
+          if (el.style.display == 'block') {
+            toggleItem(itemIDs[i]);
+          }
+        }
+      }
+    }
+    
+    for (var i = 0; i < itemIDs.length; i++) {
+      el = document.getElementById('item_' + itemIDs[i]);
+      if (el.style.display == '') {
+        el.style.display = 'block';
+      }
+    }
+    
+    toggleAll();
+  </script>
+  
+</body>
+</html>
